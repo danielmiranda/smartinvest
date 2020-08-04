@@ -6,10 +6,7 @@
         <b-navbar-brand href="#">
           <img src="@/assets/logo-smartinvest.png" alt="Smart Invest" />
         </b-navbar-brand>
-        <div>
-          <span class="h4 ml-5">AAPL:NASDAQ</span>
-          <span class="h6 ml-5">Cierre: 425.04</span>
-        </div>
+        
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -44,50 +41,34 @@
       </b-navbar>
     </div>
 
-    <b-sidebar id="sidebar-1" title="" shadow bg-variant="dark">
-      <div class="px-3 py-2">
-        <img
-          src="@/assets/iso-smartinvest.png"
-          alt="Smart Invest"
-          class="m-5"
-        />
+    <b-sidebar
+      id="sidebar-1"
+      title="Menu"
+      width="210px"
+      shadow
+      backdrop
+      close-label="Cerrar"
+      bg-variant="dark"
+      no-close-on-route-change="True"
+      sidebar-class="minishow border-right"
+    >
+      <div class="px-3 py-0 center">
+        <div class="align-content-center mx-auto">
+          <img
+            src="@/assets/iso-smartinvest.png"
+            alt="Smart Invest"
+            class="mb-3 mx-auto d-block"
+          />
+        </div>
+
         <b-list-group>
-          <b-list-group-item v-for="item in items" :key="item.message">
-            {{ item.message }}
-            <b-badge>3</b-badge>
+          <b-list-group-item v-for="item in items" :key="item.name">
+            <router-link :to="item.link">{{ item.name }}</router-link>
           </b-list-group-item>
         </b-list-group>
       </div>
     </b-sidebar>
-
-    <div class="main-content row col-12">
-      <div class="col-10">
-        <TVChartContainer datafeedUrl="http://sany.life/stock-invest" />
-      </div>
-
-      <div class="col-2">
-        <div class="bs-example">
-          <div class="list-group">
-            <!-- <a href="#" class="list-group-item list-group-item-action">
-              <i class="fa fa-camera"></i> Graficar
-              <span class="badge badge-pill badge-primary pull-right">145</span>
-            </a> -->
-            <a href="#" class="list-group-item list-group-item-action">
-              <font-awesome-icon icon="chart-bar" class="mr-2" />Graficar
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-              <font-awesome-icon icon="flask" class="mr-2" /> Analizar
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-              <font-awesome-icon icon="chart-line" class="mr-2" />
-              Estadísticas
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-              <font-awesome-icon icon="layer-group" class="mr-2" /> Fundamental
-            </a>
-          </div>
-        </div>
-      </div>
+    <div class="mx-3">
       <router-view />
     </div>
   </div>
@@ -99,15 +80,14 @@
 //<TVChartContainer datafeedUrl="http://localhost:8080/GUIA/stock-invest" />
 //
 import Burger from "@/components/Burger.vue";
-import TVChartContainer from "@/components/TVChartContainer.vue";
 export default {
-  components: { Burger, TVChartContainer },
+  components: { Burger },
   data: function() {
     return {
       items: [
-        { message: "Tableros" },
-        { message: "Reportes" },
-        { message: "Alertas" }
+        { name: "Tableros", link: "/tableros" },
+        { name: "Reportes", link: "/reportes" },
+        { name: "Alertas", link: "/alertas" }
       ],
       isOpen: false,
       username: "Usuario1"
@@ -139,7 +119,7 @@ export default {
 }
 
 .collapse.show ~ .main-content {
-  margin-left: 235px;
+  margin-left: 205px;
 }
 
 .main-content {
@@ -148,5 +128,8 @@ export default {
 }
 #sidebar-1 .close {
   color: aliceblue !important;
+}
+.minioshow {
+  left: 100px;
 }
 </style>
