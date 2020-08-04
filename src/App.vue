@@ -62,9 +62,7 @@
 
     <div class="main-content row col-12">
       <div class="col-10">
-        <TVChartContainer
-          datafeedUrl="http://localhost:8080/GUIA/stock-invest"
-        />
+        <TVChartContainer datafeedUrl="http://sany.life/stock-invest" />
       </div>
 
       <div class="col-2">

@@ -2,6 +2,8 @@
 
 ### Using Tradingview, VUE and python to scraping, procesing and analizing of stock data
 
+![SmartInvest Screen Capture](screenshot.png)
+
 ## Project setup
 ```
 npm install
