@@ -18,6 +18,8 @@ import {
   faLayerGroup
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+//import VueMomment {} from "vue-momment";
+import VueMoment from "vue-moment";
 
 library.add(
   faUserSecret,
@@ -33,6 +35,9 @@ Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(BootstrapVueIcons);
+
+//Vue.use(require("vue-moment"));
+Vue.use(VueMoment);
 
 Vue.config.productionTip = false;
 

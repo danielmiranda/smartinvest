@@ -18,7 +18,7 @@
         <div class="col-1">Botones</div>
       </div>
       <div class="col-1">
-        {{ report.timestamp }}
+        {{ report.timestamp | moment("DD/MM/YYYY") }}
       </div>
     </div>
   </div>
