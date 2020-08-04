@@ -20,3 +20,8 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# las librerias de graficos de TradingView
+public/charting_library
+public/datafeeds
+src/charting_library.min.js
