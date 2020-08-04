@@ -1,4 +1,6 @@
-# invest
+# SmartInvest
+
+### Using Tradingview, VUE and python to scraping, procesing and analizing of stock data
 
 ## Project setup
 ```
@@ -8,6 +10,9 @@ npm install
 ### Compiles and hot-reloads for development
 ```
 npm run serve
+
+#### Copy charting_library.min.js to /src
+#### Copy charting_library and datafeeds folder to /public from tradingview chart
 ```
 
 ### Compiles and minifies for production
