@@ -46,7 +46,6 @@
       title="Menu"
       width="210px"
       shadow
-      backdrop
       close-label="Cerrar"
       bg-variant="dark"
       no-close-on-route-change="True"

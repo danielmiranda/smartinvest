@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+//import Home from "../views/Home.vue";
 import Reportes from "@/views/Reportes.vue";
 import Tableros from "@/views/Tableros.vue";
 import Alertas from "@/views/Alertas.vue";
@@ -10,8 +10,8 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home
+    name: "Tableros",
+    component: Tableros
   },
   {
     path: "/reportes",
