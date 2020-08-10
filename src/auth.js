@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const ENDPOINT_PATH = "http://localhost:8080/GUIA/auth/";
+const ENDPOINT_PATH = "https://smartinvest.com.ar/auth/";
+// const ENDPOINT_PATH = "http://localhost:8080/GUIA/auth/";
 //http://localhost:8080/GUIA/auth/
 
 export default {

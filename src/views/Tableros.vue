@@ -5,7 +5,7 @@
       <span class="h6 ml-5">Cierre: 425.04</span>
     </div>
     <div class="col-10">
-      <TVChartContainer datafeedUrl="http://sany.life/stock-invest" />
+      <TVChartContainer datafeedUrl="https://smartinvest.com.ar/stock-invest" />
     </div>
 
     <div class="col-2">
@@ -38,7 +38,7 @@
 //datafeedUrl="http://localhost:8080/GUIA/stock2020"
 //<TVChartContainer datafeedUrl="http://sany.life/stock-invest" />
 //<TVChartContainer datafeedUrl="http://localhost:8080/GUIA/stock-invest" />
-//
+//<TVChartContainer datafeedUrl="https://smartinvest/stock-invest" />
 
 import TVChartContainer from "@/components/TVChartContainer.vue";
 export default {
