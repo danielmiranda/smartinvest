@@ -41,6 +41,9 @@ Vue.use(VueMoment);
 
 Vue.config.productionTip = false;
 
+// Declaro un avariable global para guardar el KEY de identificacion
+Vue.prototype.$APIKEY = null; // this.$APIKEY to access
+
 new Vue({
   router,
   render: h => h(App)

@@ -3,37 +3,67 @@ import VueRouter from "vue-router";
 //import Home from "../views/Home.vue";
 import Reportes from "@/views/Reportes.vue";
 import Tableros from "@/views/Tableros.vue";
+import Home from "@/views/Home.vue";
 import Alertas from "@/views/Alertas.vue";
+import Login from "@/views/Login.vue";
 
 Vue.use(VueRouter);
+
+const ifNotAuthenticated = (to, from, next) => {
+  console.log("ifNotAuthenticated: " + Vue.$APIKEY);
+  if (!Vue.$APIKEY) {
+    next();
+    return;
+  }
+
+  next("/");
+};
+
+const ifAuthenticated = (to, from, next) => {
+  console.log("ifAuthenticated: " + Vue.$APIKEY);
+  if (Vue.$APIKEY) {
+    next();
+    return;
+  }
+
+  next("/login");
+};
 
 const routes = [
   {
     path: "/",
-    name: "Tableros",
-    component: Tableros
+    name: "Home",
+    component: Home,
+    beforeEnter: ifAuthenticated
   },
   {
     path: "/reportes",
     name: "Reportes",
-    component: Reportes
+    component: Reportes,
+    beforeEnter: ifAuthenticated
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: Login,
+    beforeEnter: ifNotAuthenticated
   },
   {
     path: "/tableros",
     name: "Tableros",
-    component: Tableros
+    component: Tableros,
+    beforeEnter: ifAuthenticated,
+    props: () => ({ Auth: Vue.$APIKEY })
   },
   {
     path: "/alertas",
     name: "Alertas",
-    component: Alertas
+    component: Alertas,
+    beforeEnter: ifAuthenticated
   },
   {
     path: "/about",
     name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue")
   }

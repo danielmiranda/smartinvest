@@ -31,6 +31,7 @@
 </template>
 <script>
 import auth from "@/auth";
+import Vue from "vue";
 
 export default {
   name: "Login",
@@ -41,20 +42,15 @@ export default {
     loginKey: null
   }),
   methods: {
-    log(val) {
-      console.log(val);
-    },
     async login() {
       try {
-        await auth
-          .login(this.email, this.password)
-          .then(
-            response => (
-              (this.loginKey = response.data),
-              this.log(response.data),
-              this.setKey(response.data)
-            )
-          );
+        await auth.login(this.email, this.password).then(
+          response => (
+            (this.loginKey = response.data),
+            //this.log(response.data),
+            this.setKey(response.data)
+          )
+        );
 
         //this.$router.push("/");
       } catch (error) {
@@ -62,6 +58,9 @@ export default {
       }
     },
     setKey(val) {
+      //console.log("setKey: " + val);
+      Vue.$APIKEY = val;
+      this.loginKey = 1;
       this.$emit("setKey", val);
     }
   }

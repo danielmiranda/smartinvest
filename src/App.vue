@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div v-if="key">
+    <div v-if="getApiKey()">
       <div>
         <b-navbar toggleable="lg" type="light" variant="faded">
           <burger v-b-toggle.sidebar-1 class="mr-1"></burger>
@@ -71,7 +71,11 @@
     </div>
 
     <div v-else>
-      <Login v-on:setKey="onSetKey"></Login>
+      <!-- <Login v-on:setKey="onSetKey"></Login> -->
+      <router-view />
+    </div>
+    <div v-if="isOpen">
+      HOLA
     </div>
   </div>
 </template>
@@ -82,9 +86,12 @@
 //<TVChartContainer datafeedUrl="http://localhost:8080/GUIA/stock-invest" />
 //
 import Burger from "@/components/Burger.vue";
-import Login from "@/components/Login.vue";
+//import Login from "@/components/Login.vue";
+//import Vue from "vue";
+
 export default {
-  components: { Burger, Login },
+  components: { Burger },
+  props: ["Auth"],
   data: function() {
     return {
       items: [
@@ -97,13 +104,30 @@ export default {
       key: null
     };
   },
+  mounted() {
+    console.log("Auth: " + this.Auth);
+  },
+  computed: {},
   methods: {
+    getApiKey: function() {
+      // console.log("getApiKey :" + this.$APIKEY);
+      return this.$APIKEY;
+    },
     onSetKey(value) {
-      console.log("onSetKey");
-      this.key = value;
+      // console.log("onSetKey: " + value);
+      this.$APIKEY = value;
+      this.$router.push("/");
+      //this.isOpen = true;
+      //this.$forceUpdate();
+      setTimeout(() => {
+        //this.msg = "Three";
+        //this.isOpen = true;
+        //this.$forceUpdate();
+      }, 1500);
     },
     onClickSalir() {
-      this.key = null;
+      this.$APIKEY = null;
+      this.$forceUpdate();
       console.log("onClickSalir");
     }
   }
