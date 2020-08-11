@@ -1,0 +1,4 @@
+build/*.js
+config/*.js
+src/charting_library.min.js
+./src/charting_library.min.js

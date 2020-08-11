@@ -87,7 +87,8 @@
 //
 import Burger from "@/components/Burger.vue";
 //import Login from "@/components/Login.vue";
-//import Vue from "vue";
+import Vue from "vue";
+import { mapState } from "vuex";
 
 export default {
   components: { Burger },
@@ -107,16 +108,24 @@ export default {
   mounted() {
     console.log("Auth: " + this.Auth);
   },
-  computed: {},
+  computed: mapState({
+    userId: state => state.account.userId
+  }),
   methods: {
+    login() {
+      this.$store.commit("login", "DANI");
+    },
+    logout() {
+      this.$store.commit("logout");
+    },
     getApiKey: function() {
-      // console.log("getApiKey :" + this.$APIKEY);
-      return this.$APIKEY;
+      console.log("getApiKey :" + Vue.$APIKEY);
+      return Vue.$APIKEY;
     },
     onSetKey(value) {
-      // console.log("onSetKey: " + value);
-      this.$APIKEY = value;
-      this.$router.push("/");
+      console.log("onSetKey: " + value);
+      //Vue.$APIKEY = value;
+      //this.$router.push("/");
       //this.isOpen = true;
       //this.$forceUpdate();
       setTimeout(() => {
@@ -126,7 +135,7 @@ export default {
       }, 1500);
     },
     onClickSalir() {
-      this.$APIKEY = null;
+      Vue.$APIKEY = null;
       this.$forceUpdate();
       console.log("onClickSalir");
     }
