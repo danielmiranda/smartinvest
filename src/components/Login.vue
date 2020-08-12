@@ -1,7 +1,8 @@
 <template>
   <div class="login">
     <h1 class="title">Ingresar</h1>
-    <form action class="form" @submit.prevent="login" autocomplete="on">
+    <div class="form">
+      <!-- <form action class="form" @submit.prevent="login2" autocomplete="on"> -->
       <label class="form-label" for="#email"
         >Email: (ingresar "prueba@smartinvest.com.ar")</label
       >
@@ -23,14 +24,26 @@
         id="dataclave"
         placeholder="Ingrese su clave"
       />
-      <input class="form-submit" type="submit" value="Login" />
-    </form>
-    <router-link to="Reportes">Reportes</router-link>
+      <input
+        class="form-submit"
+        @click="login2()"
+        type="button"
+        value="Login"
+      />
+      <!-- </form> -->
+    </div>
+
+    <!-- <div>
+      <a @click="login2()">LOGIN</a>
+    </div> -->
   </div>
 </template>
 <script>
 import auth from "@/auth";
-import Cookies from "js-cookie";
+//import Cookies from "js-cookie";
+import axios from "axios";
+
+const ENDPOINT_PATH = "https://smartinvest.com.ar/auth/";
 
 export default {
   name: "Login",
@@ -55,10 +68,49 @@ export default {
       this.dataclave = null;
       //this.$emit("setKey", val);
       this.$store.commit("setKey", val);
-      Cookies.set("prueba", "DANI");
+      //Cookies.set("prueba", "DANI");
       window.location.href = "/";
       //this.$parent.isOpen = true;
       //this.$router.replace("/");
+    },
+    setKey2(val) {
+      console.log("RESPOSE: " + val);
+      //this.$emit("setKey", val);
+      this.$store.commit("setKey", val);
+      //Cookies.set("prueba", "DANI");
+      window.location.href = "/tableros";
+      //this.$parent.isOpen = true;
+      //this.$router.replace("/");
+    },
+    getLoginObject(email, password) {
+      return { email, password };
+    },
+    login2() {
+      // const user = this.getLoginObject(this.email, this.dataclave);
+      const user = this.getLoginObject("prueba@smartinvest.com.ar", "prueba");
+
+      this.email = null;
+      this.dataclave = null;
+
+      axios
+        .post(ENDPOINT_PATH, user, {
+          headers: {
+            CLIENTID: "1",
+            SECRETKEY: "SECRETKEY"
+          }
+        })
+        .then(
+          function(response) {
+            console.log(response.data);
+            this.setKey2(response.data);
+            //this.$store.commit("setKey", response.data);
+            //window.location.href = "/";
+            //this.output = response.data;
+          }.bind(this)
+        )
+        .catch(function(error) {
+          console.log(error);
+        });
     }
   }
 };

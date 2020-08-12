@@ -97,7 +97,7 @@ export default {
         { name: "Reportes", link: "/reportes" },
         { name: "Alertas", link: "/alertas" }
       ],
-      isOpen: true,
+      isOpen: false,
       username: "Usuario1"
     };
   },
@@ -130,6 +130,15 @@ export default {
       //setTimeout(() => {
       //this.$forceUpdate();
       //}, 1500);
+    },
+    setKey2(val) {
+      console.log("RESPOSE: " + val);
+      //this.$emit("setKey", val);
+      this.$store.commit("setKey", val);
+      //Cookies.set("prueba", "DANI");
+      window.location.href = "/";
+      //this.$parent.isOpen = true;
+      //this.$router.replace("/");
     },
     onClickSalir() {
       this.logout();
