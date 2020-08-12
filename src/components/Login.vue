@@ -30,6 +30,7 @@
 </template>
 <script>
 import auth from "@/auth";
+import Cookies from "js-cookie";
 
 export default {
   name: "Login",
@@ -54,6 +55,7 @@ export default {
       this.dataclave = null;
       //this.$emit("setKey", val);
       this.$store.commit("setKey", val);
+      Cookies.set("prueba", "DANI");
       window.location.href = "/";
       //this.$parent.isOpen = true;
       //this.$router.replace("/");
