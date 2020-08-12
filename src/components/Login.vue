@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <h1 class="title">Ingresar</h1>
-    <form action class="form" @submit.prevent="login">
+    <form action class="form" @submit.prevent="login" autocomplete="on">
       <label class="form-label" for="#email"
         >Email: (ingresar "prueba@smartinvest.com.ar")</label
       >
@@ -11,57 +11,52 @@
         type="email"
         id="email"
         required
-        placeholder="Email"
-        value="prueba@smartinvest.com.ar"
+        placeholder="Ingrese su email"
       />
       <label class="form-label" for="#password"
         >Password: (ingresar "prueba")</label
       >
       <input
-        v-model="password"
+        v-model="dataclave"
         class="form-input"
         type="password"
-        id="password"
-        placeholder="Password"
-        value="prueba"
+        id="dataclave"
+        placeholder="Ingrese su clave"
       />
       <input class="form-submit" type="submit" value="Login" />
     </form>
+    <router-link to="Reportes">Reportes</router-link>
   </div>
 </template>
 <script>
 import auth from "@/auth";
-import Vue from "vue";
 
 export default {
   name: "Login",
   data: () => ({
     email: "",
-    password: "",
-    error: false,
-    loginKey: null
+    dataclave: "",
+    error: false
   }),
   methods: {
     async login() {
       try {
-        await auth.login(this.email, this.password).then(
-          response => (
-            (this.loginKey = response.data),
-            //this.log(response.data),
-            this.setKey(response.data)
-          )
-        );
-
-        //this.$router.push("/");
+        await auth
+          .login(this.email, this.dataclave)
+          .then(response => this.setKey(response.data));
       } catch (error) {
         this.error = true;
       }
     },
     setKey(val) {
-      //console.log("setKey: " + val);
-      Vue.$APIKEY = val;
-      this.loginKey = 1;
-      this.$emit("setKey", val);
+      console.log("RESPOSE: " + val);
+      this.email = null;
+      this.dataclave = null;
+      //this.$emit("setKey", val);
+      this.$store.commit("setKey", val);
+      window.location.href = "/";
+      //this.$parent.isOpen = true;
+      //this.$router.replace("/");
     }
   }
 };

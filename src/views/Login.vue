@@ -5,20 +5,31 @@
 </template>
 <script>
 import Login from "@/components/Login.vue";
-import Vue from "vue";
 
 export default {
   components: { Login },
   methods: {
     onSetKey(value) {
-      // console.log("onSetKey: " + value);
-      Vue.$APIKEY = value;
-      this.$router.push("/");
+      console.log("onSetKey: " + value);
+
+      //this.$router.push("/tableros");
+
+      //this.$store.commit("login", value);
+
+      this.$store.commit("setKey", value);
+      //this.$router.push("/");
+      //this.$router.replace("/");
+      //this.$router.replace("/");
+
+      window.location.href = "/";
+
       //this.$parent.isOpen = true;
+
       //this.$parent.$forceUpdate();
-      // setTimeout(() => {
+      //setTimeout(() => {
+      //this.$parent.isOpen = true;
       //   //this.$forceUpdate();
-      // }, 1500);
+      //}, 1500);
     }
   }
 };

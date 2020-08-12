@@ -71,11 +71,8 @@
     </div>
 
     <div v-else>
-      <!-- <Login v-on:setKey="onSetKey"></Login> -->
-      <router-view />
-    </div>
-    <div v-if="isOpen">
-      HOLA
+      <!-- <router-view /> -->
+      <Login v-on:setKey="onSetKey"></Login>
     </div>
   </div>
 </template>
@@ -86,12 +83,12 @@
 //<TVChartContainer datafeedUrl="http://localhost:8080/GUIA/stock-invest" />
 //
 import Burger from "@/components/Burger.vue";
-//import Login from "@/components/Login.vue";
-import Vue from "vue";
-import { mapState } from "vuex";
+import Login from "@/components/Login.vue";
+//import { mapState } from "vuex";
+import store from "@/store";
 
 export default {
-  components: { Burger },
+  components: { Burger, Login },
   props: ["Auth"],
   data: function() {
     return {
@@ -100,43 +97,42 @@ export default {
         { name: "Reportes", link: "/reportes" },
         { name: "Alertas", link: "/alertas" }
       ],
-      isOpen: false,
-      username: "Usuario1",
-      key: null
+      isOpen: true,
+      username: "Usuario1"
     };
   },
   mounted() {
-    console.log("Auth: " + this.Auth);
+    console.log("mounted: " + store.getters.isAuthenticated);
+    if (store.getters.isAuthenticated) {
+      this.isOpen = true;
+    }
   },
-  computed: mapState({
-    userId: state => state.account.userId
-  }),
+  //computed: mapState({
+  //userId: state => state.account.userId,
+  //key: state => state.account.key
+  //}),
   methods: {
-    login() {
-      this.$store.commit("login", "DANI");
-    },
     logout() {
+      console.log("logout: " + this.key);
       this.$store.commit("logout");
+      this.isOpen = false;
+      //this.$router.push("/logout");
+      this.$forceUpdate();
     },
     getApiKey: function() {
-      console.log("getApiKey :" + Vue.$APIKEY);
-      return Vue.$APIKEY;
+      return this.isOpen;
     },
     onSetKey(value) {
-      console.log("onSetKey: " + value);
-      //Vue.$APIKEY = value;
+      console.log("onSetKey App: " + value);
+      //this.$store.commit("login", value);
       //this.$router.push("/");
-      //this.isOpen = true;
       //this.$forceUpdate();
-      setTimeout(() => {
-        //this.msg = "Three";
-        //this.isOpen = true;
-        //this.$forceUpdate();
-      }, 1500);
+      //setTimeout(() => {
+      //this.$forceUpdate();
+      //}, 1500);
     },
     onClickSalir() {
-      Vue.$APIKEY = null;
-      this.$forceUpdate();
+      this.logout();
       console.log("onClickSalir");
     }
   }

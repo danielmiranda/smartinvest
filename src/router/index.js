@@ -1,17 +1,20 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-//import Home from "../views/Home.vue";
 import Reportes from "@/views/Reportes.vue";
 import Tableros from "@/views/Tableros.vue";
 import Home from "@/views/Home.vue";
 import Alertas from "@/views/Alertas.vue";
 import Login from "@/views/Login.vue";
+import Logout from "@/views/Logout.vue";
+
+import store from "@/store";
 
 Vue.use(VueRouter);
 
 const ifNotAuthenticated = (to, from, next) => {
-  console.log("ifNotAuthenticated: " + Vue.$APIKEY);
-  if (!Vue.$APIKEY) {
+  let status = store.getters.isAuthenticated;
+  console.log("ifNotAuthenticated: " + status);
+  if (!status) {
     next();
     return;
   }
@@ -20,8 +23,11 @@ const ifNotAuthenticated = (to, from, next) => {
 };
 
 const ifAuthenticated = (to, from, next) => {
-  console.log("ifAuthenticated: " + Vue.$APIKEY);
-  if (Vue.$APIKEY) {
+  // console.log("ifAuthenticated: " + Vue.$APIKEY);
+  let status = store.getters.isAuthenticated;
+  console.log("ifAuthenticated: " + status);
+  // if (Vue.$APIKEY) {
+  if (status) {
     next();
     return;
   }
@@ -34,6 +40,12 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
+    beforeEnter: ifAuthenticated
+  },
+  {
+    path: "/logout",
+    name: "Logout",
+    component: Logout,
     beforeEnter: ifAuthenticated
   },
   {
