@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import "./main.css";
 import store from "@/store";
+import "@/app";
 
 import { BootstrapVue, IconsPlugin, BootstrapVueIcons } from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.min.css";
